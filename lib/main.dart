@@ -1,7 +1,11 @@
-//@dart=2.9
+
 import 'package:flutter/material.dart';
 import 'package:project_tiket/screen/dashboard.dart';
+import 'package:project_tiket/screen/homepage.dart';
 import 'package:project_tiket/screen/login.dart';
+import 'package:project_tiket/screen/pilih_tiket_view.dart';
+import 'package:get/get.dart';
+import 'package:project_tiket/screen/register.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -10,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: Login(),
+    home: dashboard(),
     );
   }
 }

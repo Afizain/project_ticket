@@ -19,20 +19,24 @@ class Login extends StatelessWidget {
       title: _title,
       home: Scaffold(
         backgroundColor: Color(0xfF1C1D27),
-        body: const MyStatefulWidget(),
+        body: const LoginPage(),
       ),
     );
   }
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+   int count = 0;
+   
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -69,37 +73,38 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ],
                 )),
             Container(
-              padding: EdgeInsets.all(10),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xfF818181)),
-                      borderRadius: BorderRadius.circular(12)),
-                  labelText: 'Email address',
-                  labelStyle: GoogleFonts.outfit(
-                    fontWeight: FontWeight.normal,
-                    color: Color(0xfF6F6F6F),
-                    fontSize: 14,
+                padding: EdgeInsets.all(10),
+                child: TextField(
+                  controller: emailController,
+                  decoration: InputDecoration(
+                    labelText: 'Email Addres',
+                    labelStyle: GoogleFonts.outfit(
+                      fontWeight: FontWeight.normal,
+                      color: Color(0xfF6F6F6F),
+                      fontSize: 14,
+                    ),
+                    enabledBorder: myinputborder(),
+                    focusedBorder: myfocusborder(),
                   ),
                 ),
               ),
-            ),
             Container(
-              padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-              child: TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                  labelText: 'Password',
-                  labelStyle: GoogleFonts.outfit(
-                    fontWeight: FontWeight.normal,
-                    color: Color(0xfF6F6F6F),
-                    fontSize: 14,
+                padding: EdgeInsets.all(10),
+                child: TextField(
+                  obscureText: true,
+                  controller: passwordController,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    labelStyle: GoogleFonts.outfit(
+                      fontWeight: FontWeight.normal,
+                      color: Color(0xfF6F6F6F),
+                      fontSize: 14,
+                    ),
+                    enabledBorder: myinputborder(),
+                    focusedBorder: myfocusborder(),
                   ),
                 ),
               ),
-            ),
             Container(
                 alignment: Alignment.topRight,
                 padding: EdgeInsets.only(top: 10, right: 10),
@@ -128,7 +133,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         builder: (_) => dashboard(),
                       ),
                     );
-                  }),
+                  }
+                  ),
             ),
             SizedBox(height: 10),
             Row(
@@ -170,7 +176,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   onPressed: () {
                     //signup screen
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => regiter()));
+                        MaterialPageRoute(builder: (context) => register()));
                   },
                 )
               ],
@@ -178,5 +184,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             ),
           ],
         ));
+  }
+  OutlineInputBorder myinputborder() {
+    //return type is OutlineInputBorder
+    return OutlineInputBorder(
+      //Outline border type for TextFeild
+      borderRadius: BorderRadius.all(Radius.circular(12)),
+      borderSide: BorderSide(
+        color: Color(0xfF6F6F6F),
+      ),
+    );
+  }
+
+  OutlineInputBorder myfocusborder() {
+    return OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(12)),
+        borderSide: BorderSide(color: Colors.white));
   }
 }
